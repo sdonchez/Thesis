@@ -1,6 +1,6 @@
 
 \documentclass[11pt,oneside]{book}   
-\usepackage{fancyhdr}           % Book class in 11 points
+\usepackage{fancyhdr}                       % Book class in 11 points
 \usepackage[top=1.25in]{geometry}
 \usepackage{graphicx}
 \usepackage{adjustbox}
@@ -9,64 +9,55 @@
 \usepackage{rotating}
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
-\parindent0pt  \parskip10pt             % make block paragraphs
-\raggedright                            % do not right justify
-
-                        %   Use current date. 
-
-% Note that book class by default is formatted to be printed back-to-back.
-%\usepackage[defernumbers=true, backend=biber, style=ieee, dashed=false]{biblatex}
-\usepackage{filecontents}
-%\addbibresource{bb.bib}
-
-
-
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{float}
+\usepackage{upgreek}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{xcolor}
+\input{listingFormat/listingFormatJSON.tex} % Listing format for JSON
+\input{listingFormat/listingFormatDocker.tex} % Listing format for Docker
+\captionsetup[table]{skip=10pt}
+\parindent0pt  \parskip10pt                 % make block paragraphs
+\raggedright                                % do not right justify
+\setlength{\headheight}{14pt}               % set header height
+\graphicspath{{img/}}                         % set graphics path
 
 \begin{document}     
-\renewcommand{\bibname}{References}                   % End of preamble, start of text.
-\frontmatter                            % only in book class (roman page #s)
+\renewcommand{\bibname}{References}         % End of preamble, start of text.
+\frontmatter                                % only in book class (roman page #s)
 \input{ECE_ReportTemplate/titlepage}
 \input{ECE_ReportTemplate/copyright}
 \input{ECE_ReportTemplate/submissionForm}
-% \input{../../content/acknowledgment}
-% \input{../../content/abstract}                             % Print title page.
-\tableofcontents                        % Print table of contents
+\input{content/acknowledgment}
+\input{content/abstract}                            
+\tableofcontents                            % Print table of contents
 \listoffigures
 \listoftables
+\lstlistoflistings
 
-\mainmatter                             % only in book class (arabic page #s)
+\mainmatter                                 % only in book class (arabic page #s)
 
- \pagestyle{fancy}
- \pagestyle{fancy}
+\pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE,LO]{\leftmark}
+\fancyhead[R]{\thepage}                     % right page number (removed twoside formatting)
+\fancyhead[L]{\leftmark}                    % left chapter title(removed twoside formatting)
 
-                  % Print a "part" heading
-                 %\input{Chapters/Chap1}
-%% Uncomment the following lines using the \part command
-%% to add part sections
-%\part{Example Part}
-% \input{../../content/chapter-introduction}   % INCLUDE: introduction
-% \input{../../content/chapter-related-work}   % INCLUDE: related work
-% \input{../../content/chapter-system}         % INCLUDE: system
-%\part{Additional Example Part}
+\input{content/introduction}                % INCLUDE: introduction
+\input{content/relatedWork}                 % INCLUDE: related work
+\input{content/systemArchitecture}          % INCLUDE: system architecture
 
-% \input{../../content/chapter-network-based-dpr}       % INCLUDE: Network DPR
-% \input{../../content/chapter-aes-encryption.tex}      % INCLUDE: AES
-% \input{../../content/chapter-experimental-results.tex} %INCLUDE: Results
-% \input{../../content/chapter-conclusion}     % INCLUDE: conclusion
+\input{content/EDFScheduling}               % INCLUDE: Network DPR
+\input{content/DMAProtection}               % INCLUDE: DMA Protection
+\input{content/keyAggregateCryptography}    % INCLUDE: KAC
+\input{content/conclusion}                  % INCLUDE: conclusion
 
-%\phantomsection 
 \addcontentsline{toc}{chapter}{References} 
 
-%\begin{refsection}[bb.bib]
-%\nocite{*}
-% %\end{refsection}
-% \bibliographystyle{IEEEbib}
-% \bibliography{../../../LaTeX_Assets/SDonchezResearch}
+\bibliographystyle{ECE_ReportTemplate/IEEEbib}
+\bibliography{SDonchezResearch}
 
 %appendices
-% \input{../../content/chapter-appendix.tex}
-\end{document}                          % The required last line
-
+\input{content/appendices.tex}
+\end{document}                              % The required last line

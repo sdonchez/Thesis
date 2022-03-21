@@ -4,5 +4,17 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"Artix",
+			"interprocess",
+			"overschedule",
+			"Peta",
+			"PFPGA",
+			"pthread",
+			"schedulability",
+			"Testbench",
+			"VFPGA"
+		]
+	}
 }

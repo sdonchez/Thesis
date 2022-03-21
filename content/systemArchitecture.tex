@@ -1,0 +1,29 @@
+% !TeX root = ../SDonchezThesis.tex
+
+\chapter{Proposed System Architecture}\label{ch:systemArchitecture}
+
+\section{Proposed implementation}\label{subsec:Proposal}
+The author proposes modifying the implementation proposed by the authors of \cite{bag_cryptographically_2020}, as outlined in Chapter \ref{ch:relatedWork} to eliminate the need for trust in the CSP, along with eliminating the duplication of the AES IP. To achieve this goal, the author proposes the implementation of an attestably secured partition within the PFPGA fabric, which contains both the KAC and AES engines. By isolating both of these components in an attestably secure partition, the CSP no longer has access to the decrypted symmetric key, preventing them from decrypting the bitstream and gaining access to the IP contained therein. Meanwhile, the presence of the single AES IP in this secured partition eliminates the need for identical engines on each partition, which increases available space and also offers flexibility with regards to VFPGA provisioning, as the only fixed limit remaining is the number of VFPGA device IDs allocated by the FPGA Vendor for the device. This number can simply be made arbitrarily large relative to the realistic number of simultaneous tenants that the device can support, such that the CSP is effectively free to divide the PFPGA as they see fit.
+
+The presence of a secure partition for decryption operations is useless without the ability to securely transport the decrypted data from said partition to the VFPGA in question. The use of the Hard Processor System (HPS), and specifically a Trusted Execution Environment (TEE) implemented therein, could conceivably facilitate the secure transfer of this information between regions of the FPGA without transiting the unsecured outer region of the programable logic. However, implementation of direct connections between partitions and the HPS such as this necessitates will require further investigation, as the mechanics of such an operation are not currently understood by the author. Alternatively, the use of direct memory access could be a route to secure transfer, although assurance must exist to prevent malicious access to the memory regions in question.
+
+The use of the HPS to facilitate such a transfer has additional advantages, as it is conceivable on larger devices that multiple such partitions could be desired to facilitate simultaneous tenant reprogramming. In either case, the use of the HPS to schedule access to the secured partition(s) could similarly prove to be a useful design component.
+
+\section{Research Objectives}\label{subsec:Obj}
+The above implementation requires a number of discrete objectives be completed and integrated into a comprehensive design. Those objectives are described below. A subset of these objectives have been evaluated as a part of this research effort, and are described in the subsequent chapters.
+
+\begin{itemize}
+  \item Obtain or design the AES and KAC cores for the secured partition.
+    \begin{itemize}  
+      \item Ideally these cores should be pipelined for efficiency
+    \end{itemize}
+  \item Investigate direct communication between partition and HPS (without untrusted transit)
+  \item Investigate use of DMA to facilitate secure communication between partitions securely
+  \item Design and Implement scheduling algorithm to allocate decryption partition to tenants
+    \begin{itemize}
+      \item With multiple AES cores, it may make sense to share a single KAC engine if secured link between them can be guaranteed (the KAC has to decrypt a single key of trivial size, whereas the AES engine is in much higher demand due to need to decrypt entire bitstream)
+    \end{itemize}
+  \item Implement attestably secure partition and provide mechanism for attestation and verification
+  \item Implement Trusted Execution Environment (if using HPS for secured data transfer)
+  \item Implement data routing and verification logic within TEE (if using HPS for secured data transfer)
+  \end{itemize}

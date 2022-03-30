@@ -14,7 +14,9 @@
 			"pthread",
 			"schedulability",
 			"Testbench",
-			"VFPGA"
+			"TRNG",
+			"VFPGA",
+			"XMPU"
 		]
 	}
 }

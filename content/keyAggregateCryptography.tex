@@ -1,3 +1,12 @@
 % !TeX root = ../SDonchezThesis.tex
 
 \chapter{Key Aggregate Cryptography}\label{ch:keyAggregateCryptography}
+One of the key tenants of the architecture proposed in \cite{bag_cryptographically_2020}, and which is incorporated into this work's proposed extension of that architecture, is the use of Key Aggregate Cryptography (KAC) to enable the secure and efficient exchange of encrypted bitstreams between a tenant designer and the CSP. KAC is an asymmetric cryptographic mechanism whereby a single set of public and private ``Master Keys'' can be used in conjunction with a set of ``Aggregate Keys'', each of which affords decryption access to only a subset of the data originally encrypted. In \cite{bag_cryptographically_2020}, the authors utilize this functionality to ensure that only the specific target FPGA can decrypt the tenant bitstream, greatly reducing the scope of vulnerability of the bitstream to third-party compromise.
+
+The concept of Key Aggregation Cryptography is very much a novel area for academic research, having been first proposed in 2013 in \cite{chu_key-aggregate_2014}. The remainder of this chapter will outline the concepts behind KAC based encryption in detail, as well as discuss the use of it in \cite{bag_cryptographically_2020} to facilitate secured bitstream exchange. It will then conclude with the discussion of the cryptosystem within the context of the proposed system architecture, as it relates to the memory isolation functionality discussed in \ref{ch:dmaProtection} as well as with regards to the efficient use of the cryptocore across the various partitions.
+
+\section{Background}\label{sec:KACBackground}
+
+\section{Utilization in Literature}\label{sec:KACLiterature}
+
+\section{Adaptation to Proposed Architecture}\label{sec:KACArchitecture}

@@ -16,7 +16,8 @@
 			"Testbench",
 			"TRNG",
 			"VFPGA",
-			"XMPU"
+			"XMPU",
+			"XPPU"
 		]
 	}
 }

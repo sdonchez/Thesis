@@ -1,7 +1,8 @@
 % !TeX root = ../SDonchezThesis.tex
 
 
-\newcommand{\ulfrule}{\xleaders\hbox{\underline{ }}\hfill\kern0pt}
+\newcommand{\ulfrule}[1]{\uline{#1\hfill}}
+
 % ************ Thesis Submission Form ************
 
 \begin{center}
@@ -20,7 +21,12 @@ Electrical and Computer Engineering Department
 \vspace{1cm}
 \noindent
 
-\noindent \textbf{ Title of Thesis}: \parbox{260pt}{\underline{\quad An Efficient and Secure Architecture for}\ulfrule{}\newline\underline{\quad FPGA-Based Multi-Tenant Cloud Applications}\ulfrule{}}
+\noindent \textbf{ Title of Thesis}: 
+\parbox{260pt}{
+	\ulfrule{\quad An Efficient and Secure Architecture for}
+	
+	\ulfrule{\null\quad FPGA-Based Multi-Tenant Cloud Applications}
+}
 
 \vspace{1cm}
 \noindent
@@ -46,7 +52,7 @@ Electrical and Computer Engineering Department
 \vfill
 \begin{tabular}{@{}p{.5in}p{4in}@{}}
 & \hrulefill \\
-& Kyle Juretus, Ph.D. \\'
+& Kyle Juretus, Ph.D. \\
 & Committee Member\\
 \end{tabular}
 \vfill
@@ -56,7 +62,7 @@ Electrical and Computer Engineering Department
 & Committee Member\\
 \end{tabular}
 \vfill
-\noindent
+%\noindent
 %Approved by\\
 %Department Chair: \underline{\makebox[.75\textwidth][l]{}} \\
 \vspace{.3in}

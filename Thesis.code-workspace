@@ -7,15 +7,20 @@
 	"settings": {
 		"cSpell.words": [
 			"Artix",
+			"EMMC",
+			"FSBL",
 			"interprocess",
 			"overschedule",
 			"Peta",
 			"PFPGA",
 			"pthread",
+			"QSPI",
 			"schedulability",
+			"SFVC",
 			"Testbench",
 			"TRNG",
 			"VFPGA",
+			"XCZU",
 			"XMPU",
 			"XPPU"
 		]

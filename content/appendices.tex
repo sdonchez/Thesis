@@ -132,13 +132,3 @@ RUN echo "source /tools/Xilinx/PetaLinux/2020.2/install/settings.sh" >> /home/vi
 RUN mkdir /home/vivado/.Xilinx
 COPY .devcontainer/Xilinx.lic /home/vivado/.Xilinx/
 \end{lstlisting}
-
-
-\chapter{XMPU-PL Design (enlarged)}\label{apx:xmpu-pl-design-enlarged}
-\begin{figure}
-  \centering
-  %TODO: make larger somehow
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio,angle=90]{isolation_bd.png}
-    \caption [Proposed XMPU-PL Design (enlarged)]{Xilinx Memory Protection Unit for Programmable Logic (XMPU-PL) in a Zynq UltraScale+ MPSoC architecture (enlarged)}
-    \label{fig:XMPU-PLDesign_large}
-\end{figure}

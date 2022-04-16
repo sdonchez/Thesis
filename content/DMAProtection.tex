@@ -1,6 +1,6 @@
 % !TeX root = ../SDonchezThesis.tex
 
-\chapter{Memory and Peripheral Isolation for Tenant Data Integrity}\label{ch:dmaProtection}
+\chapter{Memory Isolation for Tenant Data Integrity}\label{ch:dmaProtection}
 Although the EDF Algorithm outlined in the preceding chapter enables the efficient decryption of tenant bitstreams with shared decryption engines, the encrypted transmission of the bitstream is itself useless if any co-tenant on the PFPGA is granted access to the decrypted bitstream as stored in RAM. To this end, it is imperative that memory isolation functionality be utilized throughout the PFPGA to limit each tenant's partition to only the portions of the memory space that are allocated to said tenant. Similarly, care should be taken to re-allocate access permissions to the decryption engines as they change tasks, such that the end user can be guaranteed that access only persists through the decryption partition for as long as is necessary. Finally, the static partition, containing the CSP's supervisory functionality and resources, should be, to the maximum extent practical, isolated from the tenant data (although the presence of the HPS interface and the DDR controller interface in this region necessitate some amount of unrestricted access).
 
 To this end, the architecture presented in Chapter \ref{ch:systemArchitecture} incorporates the use of Xilinx Memory and Peripheral Protection Units for Programmable Logic Isolation (XMPU-PL), as proposed in \cite{noauthor_memory_2021}. By combining these cores with individual AXI interconnect switches for each partition, and configuring the Region parameters of each core according to the partition it is located in, total isolation can be achieved provided that the static bitstream is from a known and trusted source (as has been outlined elsewhere in this work).
@@ -49,7 +49,7 @@ The remainder of this chapter lays out a proposal to remedy this issue. First, i
 
 The XMPU-PL IP Core allows for the selective transit of AXI transactions from an Up-Stream AXI Master to Down-Stream AXI Slaves (as well as any responses flowing the other direction, i.e. data in response to a read request). The core extends the binary protection afforded by the TrustZone architecture by allowing address-restricted access to the AXI Slave Device. To achieve this, the core allows for the customization of up to 16 distinct regions of memory space, via the customization interface depicted in Figure \ref{fig:XMPU_region_config}. When configured, the XMPU-PL allows transactions to flow that are targeted at the given region if and only if the originating AXI Master is explicitly enabled in the ``Region XX Masters'' register. This register allows for the selective access of any of 32 distinct AXI Masters, including the various PS processors and interfaces. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.5\textwidth]{XMPU_region_config}
     \caption[XMPU Region Configuration]{Configuration of the XMPU-PL IP}
@@ -156,8 +156,14 @@ One of the key functions of the XMPU-PL is the ability to constrain upstream dev
         PS Secure Reserved & 0x10000000 & 512M & Sched/SM/Oth. PS & Yes \\
         AES Key (Encrypted) & 0x90000000 & 64K & Sched/SM/KAC & Yes \\
         AES Key (Decrypted) & 0x90010000 & 64K & Sched/SM/KAC/AES & Yes \\
-        Tenant Bitstream  (Encrypted) & 0x90020000 & 64M & Sched/SM/AES & Yes \\
-        Tenant Bitstream  (Decrypted) & 0x94020000 & 64M & Sched/SM/AES/DFXC & Yes \\
+        \begin{tabular}{@{}c@{}}
+            Tenant Bitstream\\ 
+            (Encrypted) 
+        \end{tabular} & 0x90020000 & 64M & Sched/SM/AES & Yes \\
+        \begin{tabular}{@{}c@{}}
+            Tenant Bitstream\\
+            (Decrypted) 
+        \end{tabular} & 0x94020000 & 64M & Sched/SM/AES/DFXC & Yes \\
         Tenant Storage & 0x98020000 & 128M & Tenant & No \\
         DFX Controller Config & 0xA0000000 & 64K & Sched/SM & Yes \\
         DFXC XMPU-PL Config & 0xA0010000 & 64K & Sched/SM & Yes \\
@@ -165,8 +171,14 @@ One of the key functions of the XMPU-PL is the ability to constrain upstream dev
         KAC XMPU-PL Config & 0xA0030000 & 64K & Sched/SM & Yes \\
         KAC Engine Config & 0xA0040000 & 64K & Sched/SM & Yes \\
         AES Engine Config & 0xA0050000 & 64K & Sched/SM & Yes \\
-        Tenant XMPU-PL Config (US) & 0xA0060000 & 64K & Sched/SM/Tenant & No \\
-        Tenant XMPU-PL Config (DS) & 0xA0070000 & 64K & Sched/SM & No \\
+        \begin{tabular}{@{}c@{}}
+            Tenant XMPU-PL\\ 
+            Config (Upstream)
+        \end{tabular} & 0xA0060000 & 64K & Sched/SM/Tenant & No \\
+        \begin{tabular}{@{}c@{}}
+            Tenant XMPU-PL\\ 
+            Config (Downstream)
+        \end{tabular} & 0xA0070000 & 64K & Sched/SM & No \\
         \hline
     \end{tabular}
     \caption{Memory Ranges in the Isolation Design}

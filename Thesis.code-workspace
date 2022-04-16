@@ -7,6 +7,7 @@
 	"settings": {
 		"cSpell.words": [
 			"Artix",
+			"DFXC",
 			"EMMC",
 			"FSBL",
 			"interprocess",
@@ -15,6 +16,7 @@
 			"PFPGA",
 			"pthread",
 			"QSPI",
+			"Sched",
 			"schedulability",
 			"SFVC",
 			"Testbench",

@@ -20,7 +20,7 @@ The implementation of a KAC system is based heavily on ecliptic curve cryptograp
 
 Figure \ref{fig:KAC_simple} shows a simple example of the KAC process, implemented in the context of encrypting data for shared network storage.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{KAC_simple}
     \caption[KAC Example]{A trivial example of a KAC system in use for network storage. \cite{chu_key-aggregate_2014}}
@@ -44,7 +44,7 @@ This design has benefits to the FPGA vendor as well. The FPGA vendor's developme
 \section{Adaptation to Proposed Architecture}\label{sec:KACArchitecture}
 The architecture proposed in Chapter \ref{ch:systemArchitecture} does not require massive overhauls to the encryption scheme presented in \cite{bag_cryptographically_2020}. The overall structure of the scheme, whereby a KAC engine decrypts an AES key that in turn is used to decrypt the tenant bitstream, remains intact in this effort's implementation. What changes is the number of AES cored present in the target hardware instance's hardware. In the literature implementation, there is a unique core per partition, hardcoded with that partition's index value as shown in Figure \ref{fig:bag_architecture}. This imposes substantial overhead for large FPGAs, which may have tens (or more) of partitions. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth]{bag_architecture}
     \caption[Literature Cryptosystem Implementation]{Implementation of a hybrid KAC-AES cryptosystem with one AES core per partition. \cite{bag_cryptographically_2020}}

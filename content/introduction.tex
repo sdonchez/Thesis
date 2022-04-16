@@ -4,12 +4,12 @@
 
 Field Programmable Gate Arrays, or FPGAs, have long been utilized in devices benefiting from hardware acceleration of processes unsuitable for execution on a traditional processor, but which don't warrant the time consuming and cost-prohibitive process of ASIC design. FPGAs, in essence, enable a user to utilize a Hardware Development Language (HDL) to describe electrical circuits, which are then emulated using one of a number of techniques in a way that effectively mimics the actual physical construction of said circuits. However, unlike traditional physical circuits, FPGAs can be re-programmed as a user's needs change, resulting in tremendous improvements to iteration rates as well as development costs.
 
-Traditional FPGAs, which consist solely of the programmable logic described above, have been widely replaced in industry with heterogenous systems, often comprising an FPGA alongside a ``Hard Processor System'' (HPS). In fact, modern designs such as Xilinx's Ultrascale+ MPSoC (Multi-Processor System on a Chip) line have tremendously complex architectures integrating multiple types of processors for varying applications, traditional programmable logic, dedicated digital signal processing, and more. A typical Ultrascale+ architecture is depicted in Figure \ref{fig:ultrascale}, below.
+Traditional FPGAs, which consist solely of the programmable logic described above, have been widely replaced in industry with heterogenous systems, often comprising an FPGA alongside a ``Hard Processor System'' (HPS). In fact, modern designs such as Xilinx's UltraScale+ MPSoC (Multi-Processor System on a Chip) line have tremendously complex architectures integrating multiple types of processors for varying applications, traditional programmable logic, dedicated digital signal processing, and more. A typical UltraScale+ architecture is depicted in Figure \ref{fig:ultrascale}, below.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{zynq-eg-block.PNG}
-    \caption[Typical Ultrascale+ Architecture]{Typical Ultrascale+ MPSoC Architecture \cite{noauthor_zynq_nodate}}
+    \caption[Typical UltraScale+ Architecture]{Typical UltraScale+ MPSoC Architecture \cite{noauthor_zynq_nodate}}
     \label{fig:ultrascale}
 \end{figure}
 

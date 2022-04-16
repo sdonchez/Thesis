@@ -132,3 +132,54 @@ RUN echo "source /tools/Xilinx/PetaLinux/2020.2/install/settings.sh" >> /home/vi
 RUN mkdir /home/vivado/.Xilinx
 COPY .devcontainer/Xilinx.lic /home/vivado/.Xilinx/
 \end{lstlisting}
+
+\chapter{AXI Masters Supported by the XMPU-PL IP Core}\label{apx:axi-masters}
+The table below indicates the various AXI masters supported by the XMPU-PL IP core. These masters are supported in both the lock bypass (for XMPU-PL configuration) and AXI Master-based region restriction registers. This table is recreated from \cite{noauthor_memory_2021}.
+
+\begin{table}[ht!]
+  \centering\begin{tabular}{|c|c|c|c|l|}
+      \hline
+      Field Name & Bits & Type & Reset Value & \multicolumn{1}{c|}{Description} \\
+      \hline
+      Reserved & 31 & ro & 0x0 & Reserved \\
+      MID\_FPD\_DMA[6:7] & 30 & rw & 0x0 & Enable FPD DMA [ch 6:7] \\
+      MID\_FPD\_DMA[4:5] & 29 & rw & 0x0 & Enable FPD DMA [ch 4:5] \\
+      MID\_FPD\_DMA[2:3] & 28 & rw & 0x0 & Enable FPD DMA [ch 2:3] \\
+      MID\_FPD\_DMA[0:1] & 27 & rw & 0x0 & Enable FPD DMA [ch 0:1] \\
+      MID\_DP\_DMA[4:5] & 26 & rw & 0x0 & Enable DisplayPort DMA [ch 4:5] \\
+      MID\_DP\_DMA[2:3] & 25 & rw & 0x0 & Enable DisplayPort DMA [ch 2:3] \\
+      MID\_DP\_DMA[0:1] & 24 & rw & 0x0 & Enable DisplayPort DMA [ch 0:1] \\
+      MID\_PCIE & 23 & rw & 0x0 & Enable PCIe \\
+      MID\_DAP\_AXI & 22 & rw & 0x0 & Enable Debug Access Port AXI \\
+      MID\_GPU & 21 & rw & 0x0 & Enable GPU \\
+      MID\_SATA1 & 20 & rw & 0x0 & Enable SATA1 \\
+      MID\_SATA0 & 19 & rw & 0x0 & Enable SATA0 \\
+      MID\_APU & 18 & rw & 0x0 & 
+        \begin{tabular}{@{}l@{}}
+          Enable APU \\ 
+           \quad\textit{\textbf{Note}}: Requires that AxProt[1]=0. 
+        \end{tabular}  
+        \\
+      MID\_GEM3 & 17 & rw & 0x0 & Enable GEM3 \\
+      MID\_GEM2 & 16 & rw & 0x0 & Enable GEM2 \\
+      MID\_GEM1 & 15 & rw & 0x0 & Enable GEM1 \\
+      MID\_GEM0 & 14 & rw & 0x0 & Enable GEM0 \\
+      MID\_QSPI & 13 & rw & 0x0 & Enable QSPI \\
+      MID\_NAND & 12 & rw & 0x0 & Enable NAND \\
+      MID\_SD1 & 11 & rw & 0x0 & Enable SD1 \\
+      MID\_SD0 & 10 & rw & 0x0 & Enable SD0 \\
+      MID\_LPD\_DMA[6:7] & 9 & rw & 0x0 & Enable LPD DMA [ch 6:7] \\
+      MID\_LPD\_DMA[4:5] & 8 & rw & 0x0 & Enable LPD DMA [ch 4:5] \\
+      MID\_LPD\_DMA[2:3] & 7 & rw & 0x0 & Enable LPD DMA [ch 2:3] \\
+      MID\_LPD\_DMA[0:1] & 6 & rw & 0x0 & Enable LPD DMA [ch 0:1] \\
+      MID\_DAP\_APB & 5 & rw & 0x0 & Enable Debug Access Port APB \\
+      MID\_USB1 & 4 & rw & 0x0 & Enable USB1 \\
+      MID\_USB0 & 3 & rw & 0x0 & Enable USB0 \\
+      MID\_PMU & 2 & rw & 0x1 & Enable PMU \\
+      MID\_RPU1 & 1 & rw & 0x0 & Enable RPU1 \\
+      MID\_RPU0 & 0 & rw & 0x0 & Enable RPU0 \\
+      \hline
+  \end{tabular}
+  \caption{Memory Ranges in the Isolation Design}
+  \label{table:XMPU_PL_AXI_Masters}
+\end{table}

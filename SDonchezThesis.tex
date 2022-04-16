@@ -25,6 +25,17 @@
 \setlength{\headheight}{14pt}               % set header height
 \graphicspath{{img/}}                         % set graphics path
 
+\makeatletter
+\def\ext@algorithm{lol}% algorithm captions will be written to the .lol file
+% share the list making commands and redefine the heading
+\AtBeginDocument{%
+  \let\l@algorithm\l@lstlisting
+  \let\c@algorithm\c@lstlisting
+  \let\thealgorithm\thelstlisting
+  \renewcommand{\lstlistlistingname}{Algorithms and Code Listings}%
+}
+\makeatother
+
 \begin{document}     
 \renewcommand{\bibname}{References}         % End of preamble, start of text.
 \frontmatter                                % only in book class (roman page #s)

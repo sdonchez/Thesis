@@ -9,7 +9,7 @@ The author proposes modifying the implementation proposed by the authors of \cit
 
 The presence of a secure partition for decryption operations is useless without the ability to securely transport the decrypted data from said partition to the VFPGA in question. Such a task is made far more difficult by the fact that the PFPGA only has a single set of physical connections to the physical memory, which must be commonly utilized by all of the partitions. This requires one of several strategies to ensure data integrity. One option would be for the CSP to allocate dedicated Block RAM to each partition and allow access to it only from the decryption partitions and the given tenant partition. However, such a solution would likely be prohibitively expensive, and would still require the data to traverse an untrusted region of the FPGA at some point.
 
-As an alternative, this paper proposes the use of a trusted (provided by either the FPGA vendor or a trusted third party) top level bitstream, incorporating DMA controllers for each partition that are paired with memory isolation technology contained in the trusted top level bitstream in order to prevent co-tenants from accessing each others' data. Such an architecture is captured in Figure \ref{fig:topLevelDesign}, where the memory isolation logic would be implemented at each partition boundary.
+As an alternative, this paper proposes the use of a trusted (provided by either the FPGA vendor or a trusted third party) top level bitstream, incorporating memory isolation technology contained in the trusted top level bitstream in order to prevent co-tenants from accessing each others' data. This memory isolation logic, for shared resources such as the decryption partitions, could be dynamically configured within the HPS. Such an architecture is captured in Figure \ref{fig:topLevelDesign}, where the memory isolation logic is shown implemented at each partition boundary.
 
 \begin{figure}
   \centering
@@ -35,8 +35,8 @@ The above implementation requires a number of discrete objectives be completed a
       \item With multiple AES cores, it may make sense to share a single KAC engine if secured link between them can be guaranteed (the KAC has to decrypt a single key of trivial size, whereas the AES engine is in much higher demand due to need to decrypt entire bitstream)
     \end{itemize}
   \item Implement attestably secure partition and provide mechanism for attestation and verification
-  \item Implement Trusted Execution Environment (if using HPS for secured data transfer)
-  \item Implement data routing and verification logic within TEE (if using HPS for secured data transfer)
+  \item Implement Trusted Execution Environment (within HPS for purposes of supervision and security monitoring)
+  \item Implement data routing and verification logic within TEE
   \end{itemize}
 
 The remaining chapters of this work (with the obvious exception of the conclusion) explore the design and implementation of several of these objectives. Although they do not provide a robust implementation of the entire proposed architecture (as the scope of that work was deemed too large for the given time constraints), they represent the elaboration of those features which were considered both substantial and novel, as well as closely related to the Programmable Logic portion of the system. As was briefly mentioned in Section \ref{sec:organization}, they are organized as follows.

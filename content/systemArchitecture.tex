@@ -32,7 +32,7 @@ The above implementation requires a number of discrete objectives be completed a
   \item Investigate use of DMA to facilitate secure communication between partitions securely
   \item Design and Implement scheduling algorithm to allocate decryption partition to tenants
     \begin{itemize}
-      \item With multiple AES cores, it may make sense to share a single KAC engine if secured link between them can be guaranteed (the KAC has to decrypt a single key of trivial size, whereas the AES engine is in much higher demand due to need to decrypt entire bitstream)
+      \item With multiple AES cores, it may make sense to share a single KAC engine if a secured link between them can be guaranteed (the KAC has to decrypt a single key of trivial size, whereas the AES engine is in much higher demand due to need to decrypt entire bitstream)
     \end{itemize}
   \item Implement attestably secure partition and provide mechanism for attestation and verification
   \item Implement Trusted Execution Environment (within HPS for purposes of supervision and security monitoring)
